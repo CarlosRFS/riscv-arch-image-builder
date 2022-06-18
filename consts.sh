@@ -31,9 +31,10 @@ export COMMIT_BOOT0='882671fcf53137aaafc3a94fa32e682cb7b921f1' # from 14.06.2022
 export COMMIT_UBOOT='afc07cec423f17ebb4448a19435292ddacf19c9b' # equals d1-wip (28.05.2022)
 export COMMIT_KERNEL='fe178cf0153d98b71cb01a46c8cc050826a17e77' # equals riscv/d1-wip head
 export KERNEL_TAG='riscv/d1-wip'
-export KERNEL_RELEASE='5.19.0-rc1-gfe178cf0153d-dirty' # must match commit!
+export KERNEL_RELEASE='5.19.0-AllWinnerD1-Smaeul' # must match commit!
 # use this (set to something != 0) to override the check
 export IGNORE_COMMITS=0
+export DEBUG='n'
 
 check_deps() {
     if ! pacman -Qi "${1}" > /dev/null ; then

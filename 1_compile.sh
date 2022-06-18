@@ -140,6 +140,8 @@ if [ ! -f "${OUT_DIR}/Image" ] || [ ! -f "${OUT_DIR}/Image.gz" ] ; then
     case "$KERNEL" in
         'nezha_defconfig')
             # Nezha defconfig
+	    # setting kernel release name
+            echo "CONFIG_LOCALVERSION=${KERNEL_RELEASE}" >> ${DIR}/arch/riscv/configs/nezha_defconfig
             # enable WiFi
             echo 'CONFIG_WIRELESS=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
             echo 'CONFIG_CFG80211=m' >> ${DIR}/arch/riscv/configs/nezha_defconfig
@@ -196,6 +198,16 @@ if [ ! -f "${OUT_DIR}/Image" ] || [ ! -f "${OUT_DIR}/Image.gz" ] ; then
             # enable swap
             echo 'CONFIG_SWAP=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
             echo 'CONFIG_ZSWAP=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+	    #enable Cedrus VPU Drivers
+            echo 'CONFIG_MEDIA_SUPPORT=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+            echo 'CONFIG_MEDIA_CONTROLLER=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+            echo 'CONFIG_MEDIA_CONTROLLER_REQUEST_API=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+            echo 'CONFIG_V4L_MEM2MEM_DRIVERS=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+            echo 'CONFIG_VIDEO_SUNXI_CEDRUS=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+	    # debug options
+	    if [[ $DEBUG == 'y' ]]; then
+		echo 'CONFIG_DEBUG_INFO=y' >> ${DIR}/arch/riscv/configs/nezha_defconfig
+	    fi
 
             make ARCH="${ARCH}" -C linux O=../linux-build nezha_defconfig
         ;;
